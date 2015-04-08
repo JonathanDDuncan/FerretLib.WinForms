@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using DropDownControls.FilteredGroupedComboBox;
 
 namespace FerretLib.WinForms.Controls
 {
@@ -33,18 +34,20 @@ namespace FerretLib.WinForms.Controls
         private void RebuildTagList()
         {
             txtTag.Text = "";
-            foreach (var tag in _tags.OrderBy(x=>x)) {
+            foreach (var tag in _tags.OrderBy(x => x))
+            {
                 AddTagLabel(tag);
             }
         }
 
         private void AddTag(string tag)
         {
-            if(_tags.Add(tag.Trim()))
+            if (_tags.Add(tag.Trim()))
                 AddTagLabel(tag);
         }
 
-        private void AddTagLabel(string tag) {
+        private void AddTagLabel(string tag)
+        {
             var tagLabel = new TagLabelControl(tag);
             tagLabel.Name = GetTagControlName(tag);
             tagLabel.TabStop = false;
@@ -81,7 +84,7 @@ namespace FerretLib.WinForms.Controls
         public void Clear()
         {
             _tags.Clear();
-            while(tagPanel.Controls.Count > 1)
+            while (tagPanel.Controls.Count > 2)
                 tagPanel.Controls.RemoveAt(1);
         }
 
@@ -94,11 +97,33 @@ namespace FerretLib.WinForms.Controls
 
         private void txtTag_KeyUp(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Enter){
+            if (e.KeyCode == Keys.Enter)
+            {
                 var text = txtTag.Text.Trim();
                 if (!string.IsNullOrEmpty(text)) AddTag(text);
                 txtTag.Text = "";
             }
+        }
+
+        public void SelectionItemList(IEnumerable<GroupedComboBoxItem> groupItems)
+        {
+            filteredGroupableDropDown1.FilterableGroupableDataSource(groupItems);
+        }
+
+
+        private void filteredGroupableDropDown1_SelectionChangeCommitted(object sender, System.EventArgs e)
+        {
+            if (filteredGroupableDropDown1.SelectedIndex == -1) return;
+            var selected = filteredGroupableDropDown1.Text;
+            AddTag(selected);
+        }
+
+        private void filteredGroupableDropDown1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter) return;
+            if (filteredGroupableDropDown1.SelectedIndex == -1) return;
+            var selected = filteredGroupableDropDown1.Text;
+            AddTag(selected);
         }
     }
 }

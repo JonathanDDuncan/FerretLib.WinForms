@@ -34,17 +34,17 @@
             // 
             // tagListControl1
             // 
-            this.tagListControl1.Location = new System.Drawing.Point(26, 12);
+            this.tagListControl1.Location = new System.Drawing.Point(54, 28);
             this.tagListControl1.Name = "tagListControl1";
-            this.tagListControl1.Size = new System.Drawing.Size(277, 84);
+            this.tagListControl1.Size = new System.Drawing.Size(474, 133);
             this.tagListControl1.TabIndex = 0;
             this.tagListControl1.Tags = ((System.Collections.Generic.List<string>)(resources.GetObject("tagListControl1.Tags")));
             // 
-            // frmMain
+            // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(369, 150);
+            this.ClientSize = new System.Drawing.Size(656, 264);
             this.Controls.Add(this.tagListControl1);
             this.Name = "FrmMain";
             this.Text = "frmMain";
@@ -55,6 +55,7 @@
         #endregion
 
         private Controls.TagListControl tagListControl1;
+
 
     }
 }
