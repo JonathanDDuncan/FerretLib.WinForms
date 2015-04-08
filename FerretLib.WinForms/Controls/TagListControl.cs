@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using DropDownControls.FilteredGroupedComboBox;
@@ -7,7 +8,16 @@ namespace FerretLib.WinForms.Controls
 {
     public partial class TagListControl : UserControl
     {
-        private HashSet<string> _tags;
+        public event EventHandler EditTagsEvent;
+
+        protected virtual void OnEditTagsEvent()
+        {
+            var handler = EditTagsEvent;
+            if (handler != null) handler(this, EventArgs.Empty);
+        }
+
+
+        private readonly HashSet<string> _tags;
 
         public int Count
         {
@@ -33,7 +43,7 @@ namespace FerretLib.WinForms.Controls
 
         private void RebuildTagList()
         {
-            txtTag.Text = "";
+            filteredGroupableDropDown1.Text = "";
             foreach (var tag in _tags.OrderBy(x => x))
             {
                 AddTagLabel(tag);
@@ -48,9 +58,7 @@ namespace FerretLib.WinForms.Controls
 
         private void AddTagLabel(string tag)
         {
-            var tagLabel = new TagLabelControl(tag);
-            tagLabel.Name = GetTagControlName(tag);
-            tagLabel.TabStop = false;
+            var tagLabel = new TagLabelControl(tag) { Name = GetTagControlName(tag), TabStop = false };
             tagPanel.Controls.Add(tagLabel);
             tagLabel.DeleteClicked += TagLabel_DeleteClicked;
             tagLabel.DoubleClicked += TagLabel_DoubleClicked;
@@ -71,12 +79,9 @@ namespace FerretLib.WinForms.Controls
         private void TagLabel_DoubleClicked(object sender, string tag)
         {
             RemoveTag(tag);
-            txtTag.Text = tag;
-            txtTag.Focus();
-            txtTag.SelectionStart = txtTag.TextLength;
         }
 
-        private string GetTagControlName(string tag)
+        private static string GetTagControlName(string tag)
         {
             return "tagLabel_" + tag;
         }
@@ -95,17 +100,7 @@ namespace FerretLib.WinForms.Controls
             Clear();
         }
 
-        private void txtTag_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                var text = txtTag.Text.Trim();
-                if (!string.IsNullOrEmpty(text)) AddTag(text);
-                txtTag.Text = "";
-            }
-        }
-
-        public void SelectionItemList(IEnumerable<GroupedComboBoxItem> groupItems)
+       public void SelectionItemList(IEnumerable<GroupedComboBoxItem> groupItems)
         {
             filteredGroupableDropDown1.FilterableGroupableDataSource(groupItems);
         }
@@ -124,6 +119,11 @@ namespace FerretLib.WinForms.Controls
             if (filteredGroupableDropDown1.SelectedIndex == -1) return;
             var selected = filteredGroupableDropDown1.Text;
             AddTag(selected);
+        }
+
+        private void btnEditTags_Click(object sender, System.EventArgs e)
+        {
+            OnEditTagsEvent();
         }
     }
 }

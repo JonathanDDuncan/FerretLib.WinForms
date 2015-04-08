@@ -26,6 +26,14 @@ namespace FerretLib.WinForms
 			 
 			};
             tagListControl1.SelectionItemList(groupedItems.AsEnumerable());
+
+            tagListControl1.EditTagsEvent += tagListControl1_EditTagsEvent;
+        }
+
+        void tagListControl1_EditTagsEvent(object sender, System.EventArgs e)
+        {
+            MessageBox.Show("Edit Tags Requested");
+
         }
  
     }
