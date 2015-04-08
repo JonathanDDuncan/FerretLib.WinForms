@@ -48,18 +48,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="frmDemoColorPicker.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmDemoColorPicker.Designer.cs">
-      <DependentUpon>frmDemoColorPicker.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmDemoRageMessageBox.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmDemoRageMessageBox.Designer.cs">
-      <DependentUpon>frmDemoRageMessageBox.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,12 +56,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="frmDemoColorPicker.resx">
-      <DependentUpon>frmDemoColorPicker.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmDemoRageMessageBox.resx">
-      <DependentUpon>frmDemoRageMessageBox.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -105,51 +87,6 @@
       <Project>{1bbd5465-2f72-430b-b899-926f03fef87b}</Project>
       <Name>FerretLib.WinForms</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\derp.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\drool.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\happy.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\joybitelip.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ragefull.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ragelite.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ragemild.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\stressed.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\suspicious.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\troll.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\trollderp.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\unhappy.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\weep1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\weep2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\yuno.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

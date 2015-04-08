@@ -43,16 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\ColorPicker.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\ColorPicker.Designer.cs">
-      <DependentUpon>ColorPicker.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\RageMessageBox.cs" />
-    <Compile Include="Controls\RageMessageBoxForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Controls\TagLabelControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -65,9 +55,7 @@
     <Compile Include="Controls\TagListControl.Designer.cs">
       <DependentUpon>TagListControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\TransparentControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Controls\TransparentControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -76,15 +64,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Controls\ColorPicker.resx">
-      <DependentUpon>ColorPicker.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\RageMessageBox.resx">
-      <DependentUpon>RageMessageBox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\RageMessageBoxForm.resx">
-      <DependentUpon>RageMessageBoxForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\TagLabelControl.resx">
       <DependentUpon>TagLabelControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -93,70 +72,16 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\font_GloriaHallelujah.ttf" />
-    <None Include="Resources\font_PatrickHand.ttf" />
-    <None Include="Resources\icon_round_delete.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\tagLabel_background.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\tagLabel_background_left.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\tagLabel_background_right.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\transparency.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\joybitelip.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\derp.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\drool.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\happy.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ragefull.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ragelite.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ragemild.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\stressed.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\troll.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\trollderp.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\unhappy.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\weep1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\weep2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\yuno.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\suspicious.png" />
+    <Content Include="Resources\icon_round_delete.png" />
+    <Content Include="Resources\tagLabel_background.png" />
+    <Content Include="Resources\tagLabel_background_left.png" />
+    <Content Include="Resources\tagLabel_background_right.png" />
+    <Content Include="Resources\transparency.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
