@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using DropDownControls.FilteredGroupedComboBox;
 
@@ -10,7 +9,7 @@ namespace FerretLib.WinForms.Controls
     public partial class TagListControl : UserControl
     {
        
-        private readonly Dictionary<string, Tuple<string, string>> _tags;
+        private readonly Dictionary<string, string> _tags;
         private IEnumerable<GroupedComboBoxItem> _groupItems;
 
         public int Count
@@ -35,7 +34,7 @@ namespace FerretLib.WinForms.Controls
             value.ForEach(x =>
             {
                 var item = GetTag(x);
-                if (item != null) _tags.Add(item.Value, Tuple.Create(item.Value, item.Display));
+                if (item != null) _tags.Add(item.Value,item.Display);
             }
                 );
             RebuildTagList();
@@ -49,9 +48,9 @@ namespace FerretLib.WinForms.Controls
         private void RebuildTagList()
         {
             filteredGroupableDropDown1.Text = "";
-            foreach (var tag in _tags.OrderBy(x => x.Value.Item2))
+            foreach (var tag in _tags.OrderBy(x => x.Value))
             {
-                AddTagLabel(tag.Value.Item2);
+                AddTagLabel(tag.Value);
             }
         }
 
@@ -61,7 +60,7 @@ namespace FerretLib.WinForms.Controls
             text = text.Trim();
 
             if (_tags.ContainsKey(id)) return;
-            _tags.Add(id, Tuple.Create(id, text));
+            _tags.Add(id, text);
             AddTagLabel(text);
         }
 
@@ -100,7 +99,7 @@ namespace FerretLib.WinForms.Controls
         public TagListControl()
         {
             InitializeComponent();
-            _tags = new Dictionary<string, Tuple<string, string>>();
+            _tags = new Dictionary<string, string>();
             Clear();
         }
 
