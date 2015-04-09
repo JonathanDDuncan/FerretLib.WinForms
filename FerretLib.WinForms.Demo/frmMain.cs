@@ -33,6 +33,27 @@ namespace FerretLib.WinForms
                 "7",
                 "12"
             };
+
+            var rows = new[]
+            {
+                new {Value1 = "1", Value2 = "1", Value3 = new List<string>
+                {
+                    "5",
+                    "6",
+                    "8"
+                }
+                },
+                new {Value1 = "2", Value2 = "2", Value3 = new List<string>
+                {
+                    "12",
+                    "13",
+                    "7"
+                }}
+            };
+            
+            dataGridView1.DataSource = rows;
+
+
         }
 
     }

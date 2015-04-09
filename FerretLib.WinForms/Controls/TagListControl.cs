@@ -8,6 +8,15 @@ namespace FerretLib.WinForms.Controls
 {
     public partial class TagListControl : UserControl
     {
+        public delegate void ValueChangedHandler(object sender, EventArgs args);
+
+        public event ValueChangedHandler ValueChanged;
+
+        protected virtual void OnValueChanged()
+        {
+            ValueChangedHandler handler = ValueChanged;
+            if (handler != null) handler(this, EventArgs.Empty);
+        }
 
         private readonly Dictionary<string, string> _tags;
         private IEnumerable<GroupedComboBoxItem> _groupItems;
@@ -50,6 +59,7 @@ namespace FerretLib.WinForms.Controls
             if (_tags.ContainsKey(value)) return;
             _tags.Add(value, text);
             AddTagLabel(text, value);
+            OnValueChanged();
         }
 
         private void AddTagLabel(string text, string value)
@@ -66,6 +76,7 @@ namespace FerretLib.WinForms.Controls
             _tags.Remove(item.Value);
             var tagControl = tagPanel.Controls.Find(GetTagControlName(item.Value), true)[0];
             tagPanel.Controls.Remove(tagControl);
+            OnValueChanged();
         }
 
         private GroupedComboBoxItem GetTag(string value)
@@ -88,6 +99,7 @@ namespace FerretLib.WinForms.Controls
             _tags.Clear();
             while (tagPanel.Controls.Count > 1)
                 tagPanel.Controls.RemoveAt(1);
+            OnValueChanged();
         }
 
         public TagListControl()
@@ -126,7 +138,9 @@ namespace FerretLib.WinForms.Controls
             AddTagFromComboBox();
         }
 
-        
-
+        public virtual void OnValueChanged(EventArgs eventargs)
+        {
+            OnValueChanged();
+        }
     }
 }
