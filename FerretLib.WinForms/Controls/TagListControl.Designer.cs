@@ -31,7 +31,7 @@ namespace FerretLib.WinForms.Controls
         private void InitializeComponent()
         {
             this.tagPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.filteredGroupableDropDown1 = new DropDownControls.FilteredGroupedComboBox.FilteredGroupedComboBox();
+            this.combFG = new DropDownControls.FilteredGroupedComboBox.FilteredGroupedComboBox();
             this.tagPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -40,23 +40,23 @@ namespace FerretLib.WinForms.Controls
             this.tagPanel.AutoScroll = true;
             this.tagPanel.BackColor = System.Drawing.SystemColors.ControlDark;
             this.tagPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.tagPanel.Controls.Add(this.filteredGroupableDropDown1);
+            this.tagPanel.Controls.Add(this.combFG);
             this.tagPanel.Location = new System.Drawing.Point(3, 3);
             this.tagPanel.Name = "tagPanel";
             this.tagPanel.Size = new System.Drawing.Size(468, 127);
             this.tagPanel.TabIndex = 1;
             // 
-            // filteredGroupableDropDown1
+            // combFG
             // 
-            this.filteredGroupableDropDown1.BackColor = System.Drawing.Color.White;
-            this.filteredGroupableDropDown1.DataSource = null;
-            this.filteredGroupableDropDown1.DataView = null;
-            this.filteredGroupableDropDown1.Location = new System.Drawing.Point(3, 3);
-            this.filteredGroupableDropDown1.Name = "filteredGroupableDropDown1";
-            this.filteredGroupableDropDown1.Size = new System.Drawing.Size(144, 21);
-            this.filteredGroupableDropDown1.TabIndex = 0;
-            this.filteredGroupableDropDown1.SelectionChangeCommitted += new System.EventHandler(this.filteredGroupableDropDown1_SelectionChangeCommitted);
-            this.filteredGroupableDropDown1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.filteredGroupableDropDown1_KeyDown);
+            this.combFG.BackColor = System.Drawing.Color.White;
+            this.combFG.DataSource = null;
+            this.combFG.DataView = null;
+            this.combFG.Location = new System.Drawing.Point(3, 3);
+            this.combFG.Name = "combFG";
+            this.combFG.Size = new System.Drawing.Size(144, 21);
+            this.combFG.TabIndex = 0;
+            this.combFG.SelectionChangeCommitted += new System.EventHandler(this.combFG_SelectionChangeCommitted);
+            this.combFG.KeyDown += new System.Windows.Forms.KeyEventHandler(this.combFG_KeyDown);
             // 
             // TagListControl
             // 
@@ -73,6 +73,6 @@ namespace FerretLib.WinForms.Controls
         #endregion
 
         private System.Windows.Forms.FlowLayoutPanel tagPanel;
-        private FilteredGroupedComboBox filteredGroupableDropDown1;
+        private FilteredGroupedComboBox combFG;
     }
 }

@@ -8,7 +8,7 @@ namespace FerretLib.WinForms.Controls
 {
     public partial class TagListControl : UserControl
     {
-       
+
         private readonly Dictionary<string, string> _tags;
         private IEnumerable<GroupedComboBoxItem> _groupItems;
 
@@ -17,76 +17,70 @@ namespace FerretLib.WinForms.Controls
             get { return _tags.Count; }
         }
 
-        public List<string> Tags
+        public List<string> TagValues
         {
             get { return _tags.Keys.Select(x => x).ToList(); }
-
-            set
-            {
-                SetTags(value ?? new List<string>());
-            }
+            set { SetTagValues(value); }
         }
 
-        private void SetTags(List<string> value)
+        private void SetTagValues(List<string> value)
         {
             Clear();
 
-            value.ForEach(x =>
-            {
-                var item = GetTag(x);
-                if (item != null) _tags.Add(item.Value,item.Display);
-            }
-                );
+            if (value != null)
+                value.ForEach(x =>
+                     { var item = GetTag(x); if (item != null) _tags.Add(item.Value, item.Display); });
             RebuildTagList();
-        }
-
-        private GroupedComboBoxItem GetTag(string id)
-        {
-            return _groupItems.FirstOrDefault(x => x.Value == id);
         }
 
         private void RebuildTagList()
         {
-            filteredGroupableDropDown1.Text = "";
+            combFG.Text = "";
             foreach (var tag in _tags.OrderBy(x => x.Value))
             {
-                AddTagLabel(tag.Value);
+                AddTagLabel(tag.Value, tag.Key);
             }
         }
 
-        private void AddTag(string text, string id)
+        private void AddTag(string text, string value)
         {
-            id = id.Trim();
+            value = value.Trim();
             text = text.Trim();
 
-            if (_tags.ContainsKey(id)) return;
-            _tags.Add(id, text);
-            AddTagLabel(text);
+            if (_tags.ContainsKey(value)) return;
+            _tags.Add(value, text);
+            AddTagLabel(text, value);
         }
 
-        private void AddTagLabel(string tag)
+        private void AddTagLabel(string text, string value)
         {
-            var tagLabel = new TagLabelControl(tag) { Name = GetTagControlName(tag), TabStop = false };
+            var tagLabel = new TagLabelControl(text) { Name = GetTagControlName(value), TabStop = false };
             tagPanel.Controls.Add(tagLabel);
             tagLabel.DeleteClicked += TagLabel_DeleteClicked;
         }
 
-        private void RemoveTag(string tag)
+        private void RemoveTag(string text)
         {
-            _tags.Remove(tag);
-            var tagControl = tagPanel.Controls.Find(GetTagControlName(tag), true)[0];
+            var item = GetTagByText(text);
+            if (item == null) return;
+            _tags.Remove(item.Value);
+            var tagControl = tagPanel.Controls.Find(GetTagControlName(item.Value), true)[0];
             tagPanel.Controls.Remove(tagControl);
         }
 
-        private void TagLabel_DeleteClicked(object sender, string tag)
+        private GroupedComboBoxItem GetTag(string value)
         {
-            RemoveTag(tag);
+            return _groupItems.FirstOrDefault(x => x.Value == value);
         }
 
-       
-        private static string GetTagControlName(string tag)
+        private GroupedComboBoxItem GetTagByText(string text)
         {
-            return "tagLabel_" + tag;
+            return _groupItems.FirstOrDefault(x => x.Display == text);
+        }
+
+        private static string GetTagControlName(string value)
+        {
+            return "tagLabel_" + value;
         }
 
         public void Clear()
@@ -103,31 +97,36 @@ namespace FerretLib.WinForms.Controls
             Clear();
         }
 
+        private void AddTagFromComboBox()
+        {
+            if (combFG.SelectedIndex == -1) return;
+            AddTag(combFG.Text, combFG.SelectedValue.ToString());
+        }
+
         public void SelectionItemList(IEnumerable<GroupedComboBoxItem> groupItems)
         {
             var groupedComboBoxItems = groupItems as IList<GroupedComboBoxItem> ?? groupItems.ToList();
             _groupItems = groupedComboBoxItems;
-            filteredGroupableDropDown1.FilterableGroupableDataSource(groupedComboBoxItems);
+            combFG.FilterableGroupableDataSource(groupedComboBoxItems);
         }
-        
-        private void filteredGroupableDropDown1_SelectionChangeCommitted(object sender, EventArgs e)
+
+        private void TagLabel_DeleteClicked(object sender, string text)
+        {
+            RemoveTag(text);
+        }
+
+        private void combFG_SelectionChangeCommitted(object sender, EventArgs e)
         {
             AddTagFromComboBox();
         }
 
-        private void filteredGroupableDropDown1_KeyDown(object sender, KeyEventArgs e)
+        private void combFG_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode != Keys.Enter) return;
             AddTagFromComboBox();
         }
 
-        private void AddTagFromComboBox()
-        {
-            if (filteredGroupableDropDown1.SelectedIndex == -1) return;
-            var selected = filteredGroupableDropDown1.Text;
-            var value = filteredGroupableDropDown1.SelectedValue;
-            AddTag(selected, value.ToString());
-        }
+        
 
     }
 }

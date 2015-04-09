@@ -27,7 +27,7 @@ namespace FerretLib.WinForms
 			 
 			};
             tagListControl1.SelectionItemList(groupedItems.AsEnumerable());
-            tagListControl1.Tags = new List<string>
+            tagListControl1.TagValues = new List<string>
             {
                 "3",
                 "7",

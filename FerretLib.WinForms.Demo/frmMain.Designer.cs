@@ -38,7 +38,7 @@
             this.tagListControl1.Name = "tagListControl1";
             this.tagListControl1.Size = new System.Drawing.Size(474, 133);
             this.tagListControl1.TabIndex = 0;
-            this.tagListControl1.Tags = ((System.Collections.Generic.List<string>)(resources.GetObject("tagListControl1.Tags")));
+            this.tagListControl1.TagValues = ((System.Collections.Generic.List<string>)(resources.GetObject("tagListControl1.Tags")));
             // 
             // FrmMain
             // 
