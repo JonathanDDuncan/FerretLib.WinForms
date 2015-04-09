@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using DropDownControls.FilteredGroupedComboBox;
 
@@ -26,15 +27,13 @@ namespace FerretLib.WinForms
 			 
 			};
             tagListControl1.SelectionItemList(groupedItems.AsEnumerable());
-
-            tagListControl1.EditTagsEvent += tagListControl1_EditTagsEvent;
+            tagListControl1.Tags = new List<string>
+            {
+                "3",
+                "7",
+                "12"
+            };
         }
 
-        void tagListControl1_EditTagsEvent(object sender, System.EventArgs e)
-        {
-            MessageBox.Show("Edit Tags Requested");
-
-        }
- 
     }
 }
