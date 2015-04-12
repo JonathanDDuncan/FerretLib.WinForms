@@ -34,7 +34,7 @@
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new FerretLib.WinForms.DGV.DataGridViewTagListColumn();
-            this.Column4 = new FerretLib.WinForms.DGV.CalendarColumn();
+            
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,8 +52,8 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2,
-            this.Column3,
-            this.Column4});
+            this.Column3
+           });
             this.dataGridView1.DataSource = this.bindingSource1;
             this.dataGridView1.Location = new System.Drawing.Point(25, 140);
             this.dataGridView1.Name = "dataGridView1";
@@ -87,11 +87,7 @@
             this.Column3.Name = "Column3";
             this.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Column4";
-            this.Column4.Name = "Column4";
+            
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -148,7 +144,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private DGV.DataGridViewTagListColumn Column3;
-        private DGV.CalendarColumn Column4;
+     
 
 
     }

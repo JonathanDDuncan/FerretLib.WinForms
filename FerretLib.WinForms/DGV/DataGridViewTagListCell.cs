@@ -62,7 +62,7 @@ namespace FerretLib.WinForms.DGV
         {
             get
             {
-                // Return the type of the editing control that CalendarCell uses. 
+                // Return the type of the editing control  
                 return typeof(DgvTagListControl);
             }
         }
@@ -71,7 +71,7 @@ namespace FerretLib.WinForms.DGV
         {
             get
             {
-                // Return the type of the value that CalendarCell contains. 
+                // Return the type of the value that  contained. 
 
                 return typeof(List<string>);
             }

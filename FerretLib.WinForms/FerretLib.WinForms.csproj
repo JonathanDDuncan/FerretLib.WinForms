@@ -65,14 +65,9 @@
     <Compile Include="Controls\TransparentControl.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="DGV\CalendarColumn.cs" />
-    <Compile Include="DGV\CalendarCell.cs" />
     <Compile Include="DGV\DataGridViewTagListCell.cs" />
     <Compile Include="DGV\DgvTagListControl.cs">
       <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="DGV\CalendarEditingControl.cs">
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="DGV\DataGridViewBarGraphCell.cs" />
     <Compile Include="DGV\DataGridViewTagListColumn.cs" />
