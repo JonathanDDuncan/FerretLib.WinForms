@@ -13,6 +13,7 @@ namespace FerretLib.WinForms.DGV
 
         public DgvTagListControl()
         {
+            InitializeComponent();
             _tagList = new TagListControl();
         }
 
@@ -50,22 +51,7 @@ namespace FerretLib.WinForms.DGV
         public bool EditingControlWantsInputKey(
             Keys key, bool dataGridViewWantsInputKey)
         {
-            // Let the DateTimePicker handle the keys listed. 
-            //switch (key & Keys.KeyCode)
-            //{
-            //    case Keys.Left:
-            //    case Keys.Up:
-            //    case Keys.Down:
-            //    case Keys.Right:
-            //    case Keys.Home:
-            //    case Keys.End:
-            //    case Keys.PageDown:
-            //    case Keys.PageUp:
-            //        return true;
-            //    default:
-            //        return !dataGridViewWantsInputKey;
-            //}
-            return true;
+           return true;
         }
 
         // Implements the IDataGridViewEditingControl.PrepareEditingControlForEdit  
@@ -123,9 +109,6 @@ namespace FerretLib.WinForms.DGV
             }
         }
 
-       
-
-
         protected new void OnValueChanged(EventArgs eventargs)
         {
             // Notify the DataGridView that the contents of the cell 
@@ -137,16 +120,16 @@ namespace FerretLib.WinForms.DGV
 
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DgvTagListControl));
-            this.SuspendLayout();
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(DgvTagListControl));
+            SuspendLayout();
             // 
             // DgvTagListControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.Name = "DgvTagListControl";
-            this.TagValues = ((System.Collections.Generic.List<string>)(resources.GetObject("$this.TagValues")));
+            AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            Name = "DgvTagListControl";
+            TagValues = ((List<string>)(resources.GetObject("$this.TagValues")));
              
-            this.ResumeLayout(false);
+            ResumeLayout(false);
 
         }
 

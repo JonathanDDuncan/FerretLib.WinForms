@@ -27,27 +27,7 @@ namespace FerretLib.WinForms.Controls
         {
             get { return _tags.Count; }
         }
-        public Size TagPanelPreferredSize
-        {
-            get
-            {
-                if (tagPanel != null) return tagPanel.GetPreferredSize(new Size( tagPanel.Width,0));
-                return new Size();
-            }
-        }
-
-        public FlowLayoutPanel TagPanel
-        {
-            get { return tagPanel; }
-            
-        }
-
-        public int TagPanelHeight
-        {
-            get { return tagPanel.Height; }
-           
-        }
-
+       
         public List<string> TagValues
         {
             get { return _tags.Keys.Select(x => x).ToList(); }
@@ -164,6 +144,11 @@ namespace FerretLib.WinForms.Controls
         public virtual void OnValueChanged(EventArgs eventargs)
         {
             OnValueChanged();
+        }
+
+        public Size GetTagPanelPreferredSize(Size size)
+        {
+            return tagPanel.GetPreferredSize(size);
         }
     }
 }
