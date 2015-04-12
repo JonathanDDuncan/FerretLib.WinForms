@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 
 namespace FerretLib.WinForms.DGV
 {
-    public class DataGridViewTagListColumn : DataGridViewColumn
+    public class CalendarColumn : DataGridViewColumn
     {
-        public DataGridViewTagListColumn()
-            : base(new DataGridViewTagListCell())
+        public CalendarColumn()
+            : base(new CalendarCell())
         {
         }
 
@@ -18,14 +21,15 @@ namespace FerretLib.WinForms.DGV
             }
             set
             {
-                // Ensure that the cell used for the template is a DgvTagListControl. 
+                // Ensure that the cell used for the template is a CalendarCell. 
                 if (value != null &&
-                    !value.GetType().IsAssignableFrom(typeof(DgvTagListControl)))
+                    !value.GetType().IsAssignableFrom(typeof(CalendarCell)))
                 {
-                    throw new InvalidCastException("Must be a DgvTagListControl");
+                    throw new InvalidCastException("Must be a CalendarCell");
                 }
                 base.CellTemplate = value;
             }
         }
     }
+
 }

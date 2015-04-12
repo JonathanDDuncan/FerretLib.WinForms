@@ -5,10 +5,11 @@ using FerretLib.WinForms.Controls;
 
 namespace FerretLib.WinForms.DGV
 {
-    class DgvTagListControl : DataGridViewCell, IDataGridViewEditingControl
+    public class DgvTagListControl : TagListControl , IDataGridViewEditingControl
     {
         private bool _valueChanged;
         private readonly TagListControl _tagList;
+        private bool _comboBoxVisible;
 
         public DgvTagListControl()
         {
@@ -112,7 +113,20 @@ namespace FerretLib.WinForms.DGV
             }
         }
 
-        protected void OnValueChanged(EventArgs eventargs)
+        public bool ComboBoxVisible
+        {
+            get { return _comboBoxVisible; }
+            set
+            {
+                _comboBoxVisible = value;
+                combFG.Visible = value;
+            }
+        }
+
+       
+
+
+        protected new void OnValueChanged(EventArgs eventargs)
         {
             // Notify the DataGridView that the contents of the cell 
             // have changed.
@@ -120,5 +134,22 @@ namespace FerretLib.WinForms.DGV
             EditingControlDataGridView.NotifyCurrentCellDirty(true);
             _tagList.OnValueChanged(eventargs);
         }
+
+        private void InitializeComponent()
+        {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DgvTagListControl));
+            this.SuspendLayout();
+            // 
+            // DgvTagListControl
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.Name = "DgvTagListControl";
+            this.TagValues = ((System.Collections.Generic.List<string>)(resources.GetObject("$this.TagValues")));
+             
+            this.ResumeLayout(false);
+
+        }
+
+        
     }
 }

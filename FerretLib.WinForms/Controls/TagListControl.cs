@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using DropDownControls.FilteredGroupedComboBox;
@@ -20,10 +21,31 @@ namespace FerretLib.WinForms.Controls
 
         private readonly Dictionary<string, string> _tags;
         private IEnumerable<GroupedComboBoxItem> _groupItems;
+        
 
         public int Count
         {
             get { return _tags.Count; }
+        }
+        public Size TagPanelPreferredSize
+        {
+            get
+            {
+                if (tagPanel != null) return tagPanel.GetPreferredSize(new Size( tagPanel.Width,0));
+                return new Size();
+            }
+        }
+
+        public FlowLayoutPanel TagPanel
+        {
+            get { return tagPanel; }
+            
+        }
+
+        public int TagPanelHeight
+        {
+            get { return tagPanel.Height; }
+           
         }
 
         public List<string> TagValues
@@ -81,7 +103,7 @@ namespace FerretLib.WinForms.Controls
 
         private GroupedComboBoxItem GetTag(string value)
         {
-            return _groupItems.FirstOrDefault(x => x.Value == value);
+            return _groupItems != null ? _groupItems.FirstOrDefault(x => x.Value == value) : null;
         }
 
         private GroupedComboBoxItem GetTagByText(string text)
@@ -136,6 +158,7 @@ namespace FerretLib.WinForms.Controls
         {
             if (e.KeyCode != Keys.Enter) return;
             AddTagFromComboBox();
+
         }
 
         public virtual void OnValueChanged(EventArgs eventargs)

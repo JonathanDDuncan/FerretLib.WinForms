@@ -41,10 +41,12 @@ namespace FerretLib.WinForms.Controls
             this.tagPanel.BackColor = System.Drawing.SystemColors.ControlDark;
             this.tagPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.tagPanel.Controls.Add(this.combFG);
-            this.tagPanel.Location = new System.Drawing.Point(3, 3);
+            this.tagPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tagPanel.Location = new System.Drawing.Point(0, 0);
             this.tagPanel.Name = "tagPanel";
-            this.tagPanel.Size = new System.Drawing.Size(468, 127);
+            this.tagPanel.Size = new System.Drawing.Size(474, 133);
             this.tagPanel.TabIndex = 1;
+           
             // 
             // combFG
             // 
@@ -73,6 +75,6 @@ namespace FerretLib.WinForms.Controls
         #endregion
 
         private System.Windows.Forms.FlowLayoutPanel tagPanel;
-        private FilteredGroupedComboBox combFG;
+        internal FilteredGroupedComboBox combFG;
     }
 }
