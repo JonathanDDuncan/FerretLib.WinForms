@@ -40,6 +40,15 @@ namespace FerretLib.WinForms
             
             dataGridView1.DataSource = rows;
 
+            Column3.DataSource = GetAvailableTagValues();
+
+            var colbox = new DataGridViewComboBoxColumn
+            {
+                DataSource = GetAvailableTagValues(),
+                ValueMember = "Value",
+                DisplayMember = "Display"
+            };
+            dataGridView1.Columns.Add(colbox);
 
         }
 
@@ -74,11 +83,13 @@ namespace FerretLib.WinForms
 
 
             row.MinimumHeight = 2;
-                row.Height = height;
+            row.Height = height;
         }
 
         private int GetTagPreferedHeight()
         {
+            //TODO Get height from cell, set height taking into account other columns besides TagControl Column
+
             var groupedItems = GetAvailableTagValues();
             var ctrl = new DgvTagListControl {ComboBoxVisible = false, Width = Column3.Width};
             

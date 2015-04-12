@@ -15,7 +15,7 @@ namespace FerretLib.WinForms.DGV
 
         public List<string> TagValues { get; set; }
 
-        public GroupedComboBoxItem[] SelectionItemList
+        public IEnumerable<GroupedComboBoxItem> SelectionItemList
         {
             set { tagListControl1.SelectionItemList(value); }
         }
