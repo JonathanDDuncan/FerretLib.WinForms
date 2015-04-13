@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TagList.WinForms", "FerretLib.WinForms\TagList.WinForms.csproj", "{1BBD5465-2F72-430B-B899-926F03FEF87B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TagList.WinForms", "TagList.WinForms\TagList.WinForms.csproj", "{1BBD5465-2F72-430B-B899-926F03FEF87B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TagList.WinForms.Demo", "FerretLib.WinForms.Demo\TagList.WinForms.Demo.csproj", "{F4933B6F-A2F0-4A3A-8B25-716369C7C092}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TagList.WinForms.Demo", "TagList.WinForms.Demo\TagList.WinForms.Demo.csproj", "{F4933B6F-A2F0-4A3A-8B25-716369C7C092}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
