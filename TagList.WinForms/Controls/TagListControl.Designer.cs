@@ -38,6 +38,7 @@ namespace TagList.WinForms.Controls
             // tagPanel
             // 
             this.tagPanel.AutoScroll = true;
+            this.tagPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tagPanel.BackColor = System.Drawing.SystemColors.ControlDark;
             this.tagPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.tagPanel.Controls.Add(this.combFG);
@@ -46,7 +47,6 @@ namespace TagList.WinForms.Controls
             this.tagPanel.Name = "tagPanel";
             this.tagPanel.Size = new System.Drawing.Size(474, 133);
             this.tagPanel.TabIndex = 1;
-           
             // 
             // combFG
             // 

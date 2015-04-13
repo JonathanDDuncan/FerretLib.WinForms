@@ -34,6 +34,10 @@ namespace TagList.WinForms.Controls
             set { SetTagValues(value); }
         }
 
+         public bool TagPanelAutoScroll
+        {  
+            set { tagPanel.AutoScroll  = value; }
+        }
         private void SetTagValues(List<string> value)
         {
             Clear();

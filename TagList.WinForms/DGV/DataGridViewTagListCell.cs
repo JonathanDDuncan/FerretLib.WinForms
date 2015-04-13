@@ -47,26 +47,21 @@ namespace TagList.WinForms.DGV
 
         protected override void Paint(Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, int rowIndex, DataGridViewElementStates cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
         {
-            var ctrl = ControlToPaint(cellBounds.Width, value);
+            var ctrl = GetControltoDraw(value as List<string>);
+            ctrl.Height = GetPreferredHeight(cellBounds.Width, ctrl);
 
+            var blankimg = new Bitmap(cellBounds.Width, cellBounds.Height);
+            var gblank = Graphics.FromImage(blankimg);
+            gblank.Clear(Color.White);
             var img = new Bitmap(cellBounds.Width, cellBounds.Height);
             ctrl.DrawToBitmap(img, new Rectangle(0, 0, ctrl.Width, ctrl.Height));
+            graphics.DrawImage(blankimg, cellBounds.Location);
             graphics.DrawImage(img, cellBounds.Location);
-        }
-
-        private   DgvTagListControl ControlToPaint(int cellWidth, object value)
-        {
-            var ctrl = new DgvTagListControl {ComboBoxVisible = false};
-           
-            ctrl.SelectionItemList(GetDataSource());
-            ctrl.TagValues = (List<string>) value;
-            ctrl.Height = GetPreferredHeight(cellWidth, ctrl);
-            return ctrl;
         }
 
         private IEnumerable<GroupedComboBoxItem> GetDataSource()
         {
-            var oc = (DataGridViewTagListColumn) OwningColumn;
+            var oc = (DataGridViewTagListColumn)OwningColumn;
             var ds = oc.DataSource as IEnumerable<GroupedComboBoxItem>;
             return ds;
         }
@@ -77,13 +72,32 @@ namespace TagList.WinForms.DGV
             return ctrl.GetTagPanelPreferredSize(new Size(cellWidth, 0)).Height;
         }
 
+        //So that AutoResize know how tall it is
+        protected override Size GetPreferredSize(Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex, Size constraintSize)
+        {
+            try
+            {
+                var ctrl = GetControltoDraw(Value as List<string>);
+                var cellWidth = OwningColumn.Width;
+                var preferedHeight = GetPreferredHeight(cellWidth, ctrl);
+
+                return new Size(cellWidth, preferedHeight);
+            }
+            catch (Exception ex)
+            {  //Sometimes throws error when trying to get Value because objects are not fully initialized yet
+                Console.WriteLine(ex.ToString());
+            }
+
+            return constraintSize;
+        }
+
         protected override void OnClick(DataGridViewCellEventArgs e)
         {
-           
-            var cell = DataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
-            var cellValue =  cell.Value as List<string>;
 
-            var popup = new TagListPopup {TagValues = cellValue, SelectionItemList = GetDataSource()};
+            var cell = DataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            var cellValue = cell.Value as List<string>;
+
+            var popup = new TagListPopup { TagValues = cellValue, SelectionItemList = GetDataSource() };
             var result = popup.ShowDialog();
 
             var popupTagValues = popup.TagValues;
@@ -95,26 +109,22 @@ namespace TagList.WinForms.DGV
             DataGridView.InvalidateCell(e.ColumnIndex, e.RowIndex);
         }
 
-        private void AddValuesIntoCellTagValues(List<string> cellValue, IEnumerable<string> popupTagValues, DataGridViewCell cell)
+        private static void AddValuesIntoCellTagValues(List<string> cellValue, IEnumerable<string> popupTagValues, DataGridViewCell cell)
         {
             if (cellValue == null) return;
             cellValue.Clear();
             cellValue.AddRange(popupTagValues);
-
-            if (cell != null) cell.OwningRow.Height = GetTagPreferedHeight(cellValue, cell.Size.Width);
         }
 
-        private int GetTagPreferedHeight(List<string> value, int width)
+        private DgvTagListControl GetControltoDraw(List<string> value)
         {
             var ctrl = new DgvTagListControl();
 
             ctrl.SelectionItemList(GetDataSource());
             ctrl.TagValues = value;
             ctrl.ComboBoxVisible = false;
-         
-            return ctrl.GetTagPanelPreferredSize(new Size(width, 0)).Height;;
+            ctrl.TagPanelAutoScroll = false;
+            return ctrl;
         }
-
-
     }
 }

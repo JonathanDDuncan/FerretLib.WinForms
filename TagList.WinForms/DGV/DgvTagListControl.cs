@@ -10,6 +10,7 @@ namespace TagList.WinForms.DGV
         private bool _valueChanged;
         private readonly TagListControl _tagList;
         private bool _comboBoxVisible;
+        private bool _tagPanelAutoScroll;
 
         public DgvTagListControl()
         {
@@ -108,6 +109,8 @@ namespace TagList.WinForms.DGV
                 combFG.Visible = value;
             }
         }
+
+       
 
         protected new void OnValueChanged(EventArgs eventargs)
         {

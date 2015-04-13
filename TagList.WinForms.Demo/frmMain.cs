@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using DropDownControls.FilteredGroupedComboBox;
-using TagList.WinForms.DGV;
 
 namespace TagList.WinForms
 {
@@ -14,6 +13,14 @@ namespace TagList.WinForms
             InitializeComponent();
             var groupedItems = GetAvailableTagValues();
             tagListControl1.SelectionItemList(groupedItems.AsEnumerable());
+
+            var bmp1 = new Bitmap(5,20);
+            var bmp2 = new Bitmap(5,100);
+            var g1 = Graphics.FromImage(bmp1);
+            var g2 = Graphics.FromImage(bmp2);
+            g1.Clear(Color.Blue);
+            g2.Clear(Color.BlueViolet);
+            
             tagListControl1.TagValues = new List<string>
             {
                 "3",
@@ -28,28 +35,21 @@ namespace TagList.WinForms
                     "5",
                     "6",
                     "8"
-                }
+                },Value4 = bmp1
                 },
                 new {Value1 = "2", Value2 = "2", Value3 = new List<string>
                 {
                     "12",
                     "13",
                     "7"
-                }}
+                },Value4 =  bmp2
+                }
             };
             
             dataGridView1.DataSource = rows;
 
             Column3.DataSource = GetAvailableTagValues();
-
-            var colbox = new DataGridViewComboBoxColumn
-            {
-                DataSource = GetAvailableTagValues(),
-                ValueMember = "Value",
-                DisplayMember = "Display"
-            };
-            dataGridView1.Columns.Add(colbox);
-
+             
         }
 
         private static IEnumerable<GroupedComboBoxItem> GetAvailableTagValues()
@@ -72,64 +72,5 @@ namespace TagList.WinForms
             };
         }
 
-        private void dataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-        {
-            dataGridView1.AutoResizeRows();
-        }
-
-        private void SetPreferedHeight(DataGridViewRow row)
-        {
-            var height = GetTagPreferedHeight();
-
-
-            row.MinimumHeight = 2;
-            row.Height = height;
-        }
-
-        private int GetTagPreferedHeight()
-        {
-            //TODO Get height from cell, set height taking into account other columns besides TagControl Column
-
-            var groupedItems = GetAvailableTagValues();
-            var ctrl = new DgvTagListControl {ComboBoxVisible = false, Width = Column3.Width};
-            
-            ctrl.SelectionItemList(groupedItems.AsEnumerable());
-            ctrl.TagValues = DefaultTagValues();
-
-            return ctrl.GetTagPanelPreferredSize(new Size(Column3.Width, 0)).Height;
-        }
-
-        private static List<string> DefaultTagValues()
-        {
-            return new List<string>
-            {
-                "5",
-                "6",
-                "8"
-            };
-        }
-
-        private void dataGridView1_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            SetPreferedHeightAllRows(dataGridView1);
-        }
-
-        private void dataGridView1_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
-        {
-            SetPreferedHeightAllRows(dataGridView1);
-        }
-         
-        private void dataGridView1_Validated(object sender, System.EventArgs e)
-        {
-            SetPreferedHeightAllRows(dataGridView1);
-        }
-
-        private void SetPreferedHeightAllRows(DataGridView gridView1)
-        {
-            foreach (DataGridViewRow row in gridView1.Rows)
-            {
-                SetPreferedHeight(row);
-            }
-        }
     }
 }
