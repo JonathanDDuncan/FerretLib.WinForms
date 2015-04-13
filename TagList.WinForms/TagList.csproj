@@ -64,7 +64,6 @@
     <Compile Include="DGV\DgvTagListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="DGV\DataGridViewBarGraphCell.cs" />
     <Compile Include="DGV\DataGridViewTagListColumn.cs" />
     <Compile Include="DGV\TagListPopup.cs">
       <SubType>Form</SubType>

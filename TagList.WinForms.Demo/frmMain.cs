@@ -12,7 +12,7 @@ namespace TagList.WinForms
         {
             InitializeComponent();
             var groupedItems = GetAvailableTagValues();
-            tagListControl1.LabelFont = new Font("Arial Black", 11);
+            tagListControl1.LabelFont = new Font("Arial", 11);
             tagListControl1.SelectionItemList(groupedItems.AsEnumerable());
 
             var bmp1 = new Bitmap(5,20);
@@ -50,7 +50,7 @@ namespace TagList.WinForms
             dataGridView1.DataSource = rows;
 
             Column3.DataSource = GetAvailableTagValues();
-             
+            Column3.LabelFont = new Font("Arial", 11);
         }
 
         private static IEnumerable<GroupedComboBoxItem> GetAvailableTagValues()

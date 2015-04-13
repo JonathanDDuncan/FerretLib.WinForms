@@ -15,7 +15,7 @@ namespace TagList.Controls
 
         protected virtual void OnValueChanged()
         {
-            ValueChangedHandler handler = ValueChanged;
+            var handler = ValueChanged;
             if (handler != null) handler(this, EventArgs.Empty);
         }
 
@@ -73,9 +73,9 @@ namespace TagList.Controls
 
         private void AddTagLabel(string text, string value)
         {
-            var tagLabel = new TagLabelControl() { Name = GetTagControlName(value), TabStop = false };
+            var tagLabel = new TagLabelControl() { Name = GetTagControlName(value), TabStop = false, Color = Color.LightSteelBlue  };
 
-            tagLabel.SetString(text,LabelFont);
+            tagLabel.SetString(text, LabelFont);
             tagPanel.Controls.Add(tagLabel);
             tagLabel.DeleteClicked += TagLabel_DeleteClicked;
         }
@@ -128,6 +128,7 @@ namespace TagList.Controls
 
         public void SelectionItemList(IEnumerable<GroupedComboBoxItem> groupItems)
         {
+            if (groupItems == null) return;
             var groupedComboBoxItems = groupItems as IList<GroupedComboBoxItem> ?? groupItems.ToList();
             _groupItems = groupedComboBoxItems;
             combFG.FilterableGroupableDataSource(groupedComboBoxItems);
@@ -147,7 +148,6 @@ namespace TagList.Controls
         {
             if (e.KeyCode != Keys.Enter) return;
             AddTagFromComboBox();
-
         }
 
         public virtual void OnValueChanged(EventArgs eventargs)

@@ -70,6 +70,7 @@ namespace TagList.Controls
         }
 
         public Font LabelFont { get; set; }
+        public Color Color { get; set; }
 
         #endregion
 
@@ -173,11 +174,11 @@ namespace TagList.Controls
                     canvas.Clear(Color.Transparent);
                     canvas.PixelOffsetMode = PixelOffsetMode.Half;
                     canvas.InterpolationMode = InterpolationMode.NearestNeighbor;
-                    canvas.DrawImage(Properties.Resources.tagLabel_background, new Rectangle(LEFT_WIDTH, 0, Width - LEFT_WIDTH - RIGHT_WIDTH, Height));
-                    canvas.DrawImage(Properties.Resources.tagLabel_background_left, 0, 0);
-                    canvas.DrawImage(Properties.Resources.tagLabel_background_right, Width - Properties.Resources.tagLabel_background_right.Width, 0);
+                    canvas.DrawImage(RemapColor(Properties.Resources.tagLabel_background, Color), new Rectangle(LEFT_WIDTH, 0, Width - LEFT_WIDTH - RIGHT_WIDTH, Height));
+                    canvas.DrawImage(RemapColor(Properties.Resources.tagLabel_background_left, Color), 0, 0);
+                    canvas.DrawImage(RemapColor(Properties.Resources.tagLabel_background_right, Color), Width - Properties.Resources.tagLabel_background_right.Width, 0);
                     if (_drawDeleteButton)
-                        canvas.DrawImage(Properties.Resources.icon_round_delete, _deleteButtonRegion);
+                        canvas.DrawImage(RemapColor(Properties.Resources.icon_round_delete, Color), _deleteButtonRegion);
 
                     canvas.DrawString(Value, GetFont(), Brushes.Black, LEFT_WIDTH, 1);
                 }
@@ -186,6 +187,43 @@ namespace TagList.Controls
             Refresh();
 
         }
+
+        private Bitmap RemapColor(Bitmap image, Color color)
+        {
+
+            // Set the image attribute's color mappings
+            var colorMap = new ColorMap[8];
+            colorMap[0] = new ColorMap { OldColor = GetColor("#FFF8FF3A"), NewColor = color };
+            colorMap[1] = new ColorMap { OldColor = GetColor("#FFCFAA18"), NewColor = Brightness(color, 0.9) };
+            colorMap[2] = new ColorMap { OldColor = GetColor("#FFB36E00"), NewColor = Brightness(color, 1.5) };
+            colorMap[3] = new ColorMap { OldColor = GetColor("#FFDFCB25"), NewColor = Brightness(color, 0.9) };
+            colorMap[4] = new ColorMap { OldColor = GetColor("#FFF8FE3A"), NewColor = color };
+            colorMap[5] = new ColorMap { OldColor = GetColor("#FFC28D0D"), NewColor = Brightness(color, 1.5) };
+            colorMap[6] = new ColorMap { OldColor = GetColor("#A5B36E00"), NewColor = Brightness(color, 1.5) };
+            colorMap[7] = new ColorMap { OldColor = GetColor("#37B36E00"), NewColor = Brightness(color, 1.5) };
+        
+            var attr = new ImageAttributes();
+            attr.SetRemapTable(colorMap);
+            var g = Graphics.FromImage(image);
+            g.DrawImage(image, new Rectangle(0, 0, image.Width, image.Height), 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, attr);
+            return image;
+        }
+
+        private static Color Brightness(Color c1, double factor)
+        {
+            return Color.FromArgb(c1.A, Math.Min((int)(c1.R * factor), 255), Math.Min((int)(c1.G * factor), 255), Math.Min((int)(c1.B * factor), 255));
+        }
+
+        private static Color GetColor(string colorString)
+        {
+            var cc = new ColorConverter();
+            var convertFromString = cc.ConvertFromString(colorString);
+            if (convertFromString != null)
+                return (Color)convertFromString;
+
+            return Color.Empty;
+        }
+
         #endregion
         #region Event overrides
         protected override void OnMouseLeave(EventArgs e)

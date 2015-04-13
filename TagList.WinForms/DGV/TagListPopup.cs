@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using DropDownControls.FilteredGroupedComboBox;
 
@@ -20,8 +21,11 @@ namespace TagList.DGV
             set { tagListControl1.SelectionItemList(value); }
         }
 
+        public Font LabelFont { get; set; }
+
         private void TagListPopup_Load(object sender, EventArgs e)
         {
+            tagListControl1.LabelFont = LabelFont;
             tagListControl1.TagValues = TagValues;
         }
 

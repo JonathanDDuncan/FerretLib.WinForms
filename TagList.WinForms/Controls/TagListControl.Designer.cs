@@ -39,7 +39,7 @@ namespace TagList.Controls
             // 
             this.tagPanel.AutoScroll = true;
             this.tagPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tagPanel.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.tagPanel.BackColor = System.Drawing.Color.White;
             this.tagPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.tagPanel.Controls.Add(this.combFG);
             this.tagPanel.Dock = System.Windows.Forms.DockStyle.Fill;

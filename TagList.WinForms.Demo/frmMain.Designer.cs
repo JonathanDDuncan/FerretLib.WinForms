@@ -36,13 +36,13 @@ namespace TagList.WinForms
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new DataGridViewTagListColumn();
+            this.Column3 = new TagList.DGV.DataGridViewTagListColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewImageColumn();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTagListColumn1 = new DataGridViewTagListColumn();
-            this.tagListControl1 = new TagListControl();
+            this.dataGridViewTagListColumn1 = new TagList.DGV.DataGridViewTagListColumn();
+            this.tagListControl1 = new TagList.Controls.TagListControl();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
@@ -63,6 +63,7 @@ namespace TagList.WinForms
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(640, 346);
             this.dataGridView1.TabIndex = 1;
+            this.dataGridView1.VirtualMode = true;
             // 
             // Column1
             // 

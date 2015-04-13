@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using DropDownControls.FilteredGroupedComboBox;
 using TagList.Controls;
@@ -24,7 +25,13 @@ namespace TagList.DGV
             }
             else
             {
-                if (ctl != null) ctl.TagValues = (List<string>)Value;
+                if (ctl != null)
+                {
+                    if (Value == null  ||   DBNull.Value.Equals(Value))
+                        ctl.TagValues = new List<string>();
+                    else
+                        ctl.TagValues = (List<string>)Value;
+                }
             }
         }
 
@@ -47,15 +54,31 @@ namespace TagList.DGV
 
         protected override void Paint(Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, int rowIndex, DataGridViewElementStates cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
         {
-            var ctrl = GetControltoDraw(value as List<string>);
+            // Draw the cell background, if specified. 
+            if ((paintParts & DataGridViewPaintParts.Background) ==
+                DataGridViewPaintParts.Background)
+            {
+                var cellBackground =
+                    new SolidBrush(cellStyle.BackColor);
+                graphics.FillRectangle(cellBackground, cellBounds);
+                cellBackground.Dispose();
+            }
+
+            // Draw the cell borders, if specified. 
+            if ((paintParts & DataGridViewPaintParts.Border) ==
+                DataGridViewPaintParts.Border)
+            {
+                PaintBorder(graphics, clipBounds, cellBounds, cellStyle,
+                    advancedBorderStyle);
+            }
+
+            var list = value as List<string>;
+            if (list == null || !list.Any()) return;
+            var ctrl = GetControltoDraw(list);
             ctrl.Height = GetPreferredHeight(cellBounds.Width, ctrl);
 
-            var blankimg = new Bitmap(cellBounds.Width, cellBounds.Height);
-            var gblank = Graphics.FromImage(blankimg);
-            gblank.Clear(Color.White);
-            var img = new Bitmap(cellBounds.Width, cellBounds.Height);
+            var img = new Bitmap(cellBounds.Width - 2, cellBounds.Height - 2);
             ctrl.DrawToBitmap(img, new Rectangle(0, 0, ctrl.Width, ctrl.Height));
-            graphics.DrawImage(blankimg, cellBounds.Location);
             graphics.DrawImage(img, cellBounds.Location);
         }
 
@@ -96,34 +119,38 @@ namespace TagList.DGV
 
             var cell = DataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
             var cellValue = cell.Value as List<string>;
-
-            var popup = new TagListPopup { TagValues = cellValue, SelectionItemList = GetDataSource() };
+            var owningColumn = (DataGridViewTagListColumn)OwningColumn;
+            var popup = new TagListPopup { TagValues = cellValue, SelectionItemList = GetDataSource(), LabelFont = owningColumn.LabelFont };
             var result = popup.ShowDialog();
 
             var popupTagValues = popup.TagValues;
             popup.Close();
             if (result != DialogResult.OK) return;
 
-            AddValuesIntoCellTagValues(cellValue, popupTagValues, cell);
+            Value = AddValuesIntoCellTagValues(cellValue, popupTagValues, cell);
 
             DataGridView.InvalidateCell(e.ColumnIndex, e.RowIndex);
         }
 
-        private static void AddValuesIntoCellTagValues(List<string> cellValue, IEnumerable<string> popupTagValues, DataGridViewCell cell)
+        private static List<string> AddValuesIntoCellTagValues(List<string> cellValue, IEnumerable<string> popupTagValues, DataGridViewCell cell)
         {
-            if (cellValue == null) return;
+            if (cellValue == null) cellValue = new List<string>();
             cellValue.Clear();
             cellValue.AddRange(popupTagValues);
+
+            return cellValue;
         }
 
         private DgvTagListControl GetControltoDraw(List<string> value)
         {
             var ctrl = new DgvTagListControl();
-
+            var owningColumn = (DataGridViewTagListColumn)OwningColumn;
+            ctrl.LabelFont = owningColumn.LabelFont;
             ctrl.SelectionItemList(GetDataSource());
             ctrl.TagValues = value;
             ctrl.ComboBoxVisible = false;
             ctrl.TagPanelAutoScroll = false;
+
             return ctrl;
         }
     }

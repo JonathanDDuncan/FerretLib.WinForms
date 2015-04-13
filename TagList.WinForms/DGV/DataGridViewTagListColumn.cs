@@ -1,29 +1,23 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace TagList.DGV
 {
     public class DataGridViewTagListColumn : DataGridViewColumn
     {
+        public Font LabelFont { get; set; }
+
         public DataGridViewTagListColumn()
             : base(new DataGridViewTagListCell())
         {
         }
 
         private DataGridViewTagListCell DataGridViewTagListTemplate
-        {
-            get
-            {
-                return (DataGridViewTagListCell)CellTemplate;
-            }
-        }
+        { get { return (DataGridViewTagListCell)CellTemplate; } }
 
-      [
-            DefaultValue(null),
-            RefreshProperties(RefreshProperties.Repaint),
-            AttributeProvider(typeof(IListSource)),
-        ]
+        [DefaultValue(null), RefreshProperties(RefreshProperties.Repaint), AttributeProvider(typeof(IListSource))]
         public object DataSource
         {
             get
@@ -53,16 +47,12 @@ namespace TagList.DGV
                         dataGridViewCell.DataSource = value;
                     }
                 }
-                //DataGridView.OnColumnCommonChange(this.Index);
             }
         }
 
         public override DataGridViewCell CellTemplate
         {
-            get
-            {
-                return base.CellTemplate;
-            }
+            get { return base.CellTemplate; }
             set
             {
                 // Ensure that the cell used for the template is a DgvTagListControl. 
@@ -74,5 +64,6 @@ namespace TagList.DGV
                 base.CellTemplate = value;
             }
         }
+
     }
 }
