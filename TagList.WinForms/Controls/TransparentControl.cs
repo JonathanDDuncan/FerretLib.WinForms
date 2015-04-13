@@ -1,6 +1,6 @@
 using System.Windows.Forms;
 
-namespace TagList.WinForms.Controls
+namespace TagList.Controls
 {
     internal class TransparentControl : Control
     {

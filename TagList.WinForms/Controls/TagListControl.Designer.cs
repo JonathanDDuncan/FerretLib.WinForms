@@ -1,6 +1,6 @@
 ﻿using DropDownControls.FilteredGroupedComboBox;
 
-namespace TagList.WinForms.Controls
+namespace TagList.Controls
 {
     partial class TagListControl
     {

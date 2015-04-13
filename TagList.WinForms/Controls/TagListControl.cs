@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using DropDownControls.FilteredGroupedComboBox;
 
-namespace TagList.WinForms.Controls
+namespace TagList.Controls
 {
     public partial class TagListControl : UserControl
     {

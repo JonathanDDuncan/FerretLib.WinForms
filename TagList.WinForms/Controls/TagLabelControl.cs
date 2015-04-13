@@ -4,7 +4,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
 
-namespace TagList.WinForms.Controls
+namespace TagList.Controls
 {
     internal partial class TagLabelControl : UserControl
     {

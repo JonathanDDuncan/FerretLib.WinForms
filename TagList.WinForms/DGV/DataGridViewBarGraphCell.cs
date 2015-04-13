@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace TagList.WinForms.DGV
+namespace TagList.DGV
 {
    public class DataGridViewBarGraphCell : DataGridViewTextBoxCell
     {

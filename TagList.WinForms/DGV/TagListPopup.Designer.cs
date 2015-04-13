@@ -1,4 +1,6 @@
-﻿namespace TagList.WinForms.DGV
+﻿using TagList.Controls;
+
+namespace TagList.DGV
 {
     partial class TagListPopup
     {
@@ -29,7 +31,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TagListPopup));
-            this.tagListControl1 = new TagList.WinForms.Controls.TagListControl();
+            this.tagListControl1 = new TagListControl();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnOk = new System.Windows.Forms.Button();
@@ -129,7 +131,7 @@
 
         #endregion
 
-        private Controls.TagListControl tagListControl1;
+        private TagListControl tagListControl1;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using TagList.WinForms.Controls;
+using TagList.Controls;
 
-namespace TagList.WinForms.DGV
+namespace TagList.DGV
 {
     public class DgvTagListControl : TagListControl , IDataGridViewEditingControl
     {

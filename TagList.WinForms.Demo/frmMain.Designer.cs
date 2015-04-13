@@ -1,4 +1,7 @@
-﻿namespace TagList.WinForms
+﻿using TagList.Controls;
+using TagList.DGV;
+
+namespace TagList.WinForms
 {
     partial class FrmMain
     {
@@ -33,13 +36,13 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new TagList.WinForms.DGV.DataGridViewTagListColumn();
+            this.Column3 = new DataGridViewTagListColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewImageColumn();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTagListColumn1 = new TagList.WinForms.DGV.DataGridViewTagListColumn();
-            this.tagListControl1 = new TagList.WinForms.Controls.TagListControl();
+            this.dataGridViewTagListColumn1 = new DataGridViewTagListColumn();
+            this.tagListControl1 = new TagListControl();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
@@ -133,15 +136,15 @@
 
         #endregion
 
-        private Controls.TagListControl tagListControl1;
+        private TagListControl tagListControl1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.BindingSource bindingSource1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private DGV.DataGridViewTagListColumn dataGridViewTagListColumn1;
+        private DataGridViewTagListColumn dataGridViewTagListColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private DGV.DataGridViewTagListColumn Column3;
+        private DataGridViewTagListColumn Column3;
         private System.Windows.Forms.DataGridViewImageColumn Column4;
      
 

@@ -1,4 +1,4 @@
-﻿namespace TagList.WinForms.Controls
+﻿namespace TagList.Controls
 {
     partial class TagLabelControl
     {

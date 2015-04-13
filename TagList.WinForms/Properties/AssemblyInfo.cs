@@ -1,16 +1,15 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("TagList.WinForms")]
+[assembly: AssemblyTitle("TagList")]
 [assembly: AssemblyDescription("WinForms controls")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("TagList.WinForms")]
-[assembly: AssemblyCopyright("Copyright ©  2014 Nathan Chere")]
+[assembly: AssemblyProduct("TagList")]
+[assembly: AssemblyCopyright("Copyright ©  2014 Jonathan Duncan")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

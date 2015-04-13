@@ -87,9 +87,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TagList.WinForms\TagList.WinForms.csproj">
+    <ProjectReference Include="..\TagList.WinForms\TagList.csproj">
       <Project>{1bbd5465-2f72-430b-b899-926f03fef87b}</Project>
-      <Name>TagList.WinForms</Name>
+      <Name>TagList</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

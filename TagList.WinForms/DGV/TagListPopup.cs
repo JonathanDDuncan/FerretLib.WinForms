@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using DropDownControls.FilteredGroupedComboBox;
 
-namespace TagList.WinForms.DGV
+namespace TagList.DGV
 {
     public partial class TagListPopup : Form
     {
