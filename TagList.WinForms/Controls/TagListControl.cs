@@ -21,23 +21,26 @@ namespace TagList.WinForms.Controls
 
         private readonly Dictionary<string, string> _tags;
         private IEnumerable<GroupedComboBoxItem> _groupItems;
-        
+
 
         public int Count
         {
             get { return _tags.Count; }
         }
-       
+
         public List<string> TagValues
         {
             get { return _tags.Keys.Select(x => x).ToList(); }
             set { SetTagValues(value); }
         }
 
-         public bool TagPanelAutoScroll
-        {  
-            set { tagPanel.AutoScroll  = value; }
+        public bool TagPanelAutoScroll
+        {
+            set { tagPanel.AutoScroll = value; }
         }
+
+        public Font LabelFont { get; set; }
+
         private void SetTagValues(List<string> value)
         {
             Clear();
@@ -70,7 +73,9 @@ namespace TagList.WinForms.Controls
 
         private void AddTagLabel(string text, string value)
         {
-            var tagLabel = new TagLabelControl(text) { Name = GetTagControlName(value), TabStop = false };
+            var tagLabel = new TagLabelControl() { Name = GetTagControlName(value), TabStop = false };
+
+            tagLabel.SetString(text,LabelFont);
             tagPanel.Controls.Add(tagLabel);
             tagLabel.DeleteClicked += TagLabel_DeleteClicked;
         }

@@ -12,6 +12,7 @@ namespace TagList.WinForms
         {
             InitializeComponent();
             var groupedItems = GetAvailableTagValues();
+            tagListControl1.LabelFont = new Font("Arial Black", 11);
             tagListControl1.SelectionItemList(groupedItems.AsEnumerable());
 
             var bmp1 = new Bitmap(5,20);

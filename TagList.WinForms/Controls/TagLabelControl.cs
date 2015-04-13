@@ -15,19 +15,22 @@ namespace TagList.WinForms.Controls
         private string _value;
         private const int HEIGHT = 19;
         private const int LEFT_WIDTH = 9;
-        private const int MARGIN = 3;
+        private const int MARGIN = 1;
         private const int RIGHT_WIDTH = 15;
 
         #region ctor
-        private bool isDisposing;
+        private bool _isDisposing;
 
-        public TagLabelControl() : this("New Tag")
-        {
-        }
 
-        public TagLabelControl(string value)
+        public TagLabelControl()
         {
             InitializeComponent();
+
+        }
+
+        public void SetString(string value, Font labelFont)
+        {
+            LabelFont = labelFont;
             Value = value;
 
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.SupportsTransparentBackColor | ControlStyles.OptimizedDoubleBuffer, true);
@@ -40,10 +43,11 @@ namespace TagList.WinForms.Controls
 
         protected override void Dispose(bool disposing)
         {
-            isDisposing = true;
-            if (disposing) {
-                if (backbuffer != null)
-                    backbuffer.Dispose();
+            _isDisposing = true;
+            if (disposing)
+            {
+                if (_backbuffer != null)
+                    _backbuffer.Dispose();
                 if (components != null)
                     components.Dispose();
             }
@@ -65,16 +69,16 @@ namespace TagList.WinForms.Controls
             }
         }
 
+        public Font LabelFont { get; set; }
+
         #endregion
 
         #region Input events
-        
+
         private void Control_Click(object sender, EventArgs e)
         {
-            if (IsCursorOverDeleteButton())
-            {
-                if (DeleteClicked != null) DeleteClicked(this, Value);
-            }
+            if (!IsCursorOverDeleteButton()) return;
+            if (DeleteClicked != null) DeleteClicked(this, Value);
         }
 
         private void Control_DoubleClick(object sender, EventArgs e)
@@ -91,14 +95,15 @@ namespace TagList.WinForms.Controls
 
         #region Rendering
 
-        private Bitmap backbuffer;
+        private Bitmap _backbuffer;
         private bool _drawDeleteButton;
-        private static Font font = new Font("Buxton Sketch", 11);
 
         private void ResizeControl()
         {
-            using (var g = Graphics.FromImage(backbuffer)) {
-                int width = (int)g.MeasureString(Value, font).Width + LEFT_WIDTH + RIGHT_WIDTH + MARGIN + MARGIN;
+            using (var g = Graphics.FromImage(_backbuffer))
+            {
+                //The extra width of an i margin
+                var width = MeasureDisplayStringWidth(g, Value + "i", GetFont()) + LEFT_WIDTH + RIGHT_WIDTH;
                 MaximumSize = new Size(width, HEIGHT);
                 MinimumSize = MaximumSize;
                 Width = width;
@@ -107,41 +112,63 @@ namespace TagList.WinForms.Controls
             _deleteButtonRegion = new Rectangle(Width - 18, 1, 16, 16);
         }
 
+        private Font GetFont()
+        {
+            return LabelFont ?? new Font("Buxton Sketch", 11);
+        }
+
         private void RecreateBuffer()
         {
-            if (isDisposing)
+            if (_isDisposing)
                 return;
 
             var newBuffer = new Bitmap(Math.Max(Width, 1), Math.Max(Height, 1), PixelFormat.Format32bppPArgb);
 
-            if (backbuffer != null) {
-                using (var g = Graphics.FromImage(newBuffer)) {
-                    g.DrawImage(backbuffer, Point.Empty);
+            if (_backbuffer != null)
+            {
+                using (var g = Graphics.FromImage(newBuffer))
+                {
+                    g.DrawImage(_backbuffer, Point.Empty);
                 }
-                backbuffer.Dispose();
+                _backbuffer.Dispose();
             }
 
-            backbuffer = newBuffer;
+            _backbuffer = newBuffer;
 
             DoInvalidate();
         }
 
         private void DoInvalidate()
         {
-            if (Parent != null) {
-                Rectangle rc = new Rectangle(this.Location, this.Size);
+            if (Parent != null)
+            {
+                var rc = new Rectangle(Location, Size);
                 Parent.Invalidate(rc, true);
             }
             Invalidate();
         }
 
+        static public int MeasureDisplayStringWidth(Graphics graphics, string text, Font font)
+        {
+            var format = new StringFormat();
+            var rect = new RectangleF(0, 0, 1000, 1000);
+            CharacterRange[] ranges = { new CharacterRange(0, text.Length) };
+
+            format.SetMeasurableCharacterRanges(ranges);
+
+            var regions = graphics.MeasureCharacterRanges(text, font, rect, format);
+            rect = regions[0].GetBounds(graphics);
+
+            return (int)(rect.Right + 1.0f);
+        }
+
         private void Redraw()
         {
-            if (backbuffer == null)
+            if (_backbuffer == null)
                 return;
             try
             {
-                using (var canvas = Graphics.FromImage(backbuffer))
+                using (var canvas = Graphics.FromImage(_backbuffer))
                 {
                     canvas.Clear(Color.Transparent);
                     canvas.PixelOffsetMode = PixelOffsetMode.Half;
@@ -152,12 +179,12 @@ namespace TagList.WinForms.Controls
                     if (_drawDeleteButton)
                         canvas.DrawImage(Properties.Resources.icon_round_delete, _deleteButtonRegion);
 
-                    canvas.DrawString(Value, font, Brushes.Black, LEFT_WIDTH, 1);
+                    canvas.DrawString(Value, GetFont(), Brushes.Black, LEFT_WIDTH, 1);
                 }
             }
-            catch {  }
+            catch { }
             Refresh();
-            
+
         }
         #endregion
         #region Event overrides
@@ -166,11 +193,9 @@ namespace TagList.WinForms.Controls
             base.OnMouseLeave(e);
             Cursor = Cursors.Default;
 
-            if (_drawDeleteButton) {
-                _drawDeleteButton = false;
-                Redraw();
-            }
-
+            if (!_drawDeleteButton) return;
+            _drawDeleteButton = false;
+            Redraw();
         }
 
         protected override void OnMouseMove(MouseEventArgs e)
@@ -178,10 +203,9 @@ namespace TagList.WinForms.Controls
             base.OnMouseMove(e);
             Cursor = IsCursorOverDeleteButton() ? Cursors.Hand : Cursors.Default;
 
-            if (!_drawDeleteButton) {
-                _drawDeleteButton = true;
-                Redraw();
-            }
+            if (_drawDeleteButton) return;
+            _drawDeleteButton = true;
+            Redraw();
         }
 
         protected override void OnResize(EventArgs e)
@@ -192,8 +216,8 @@ namespace TagList.WinForms.Controls
         }
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (!isDisposing && backbuffer != null)
-                e.Graphics.DrawImage(backbuffer, Point.Empty);
+            if (!_isDisposing && _backbuffer != null)
+                e.Graphics.DrawImage(_backbuffer, Point.Empty);
         }
         #endregion
 

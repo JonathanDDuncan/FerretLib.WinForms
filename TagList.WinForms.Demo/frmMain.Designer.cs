@@ -56,7 +56,7 @@
             this.Column3,
             this.Column4});
             this.dataGridView1.DataSource = this.bindingSource1;
-            this.dataGridView1.Location = new System.Drawing.Point(25, 140);
+            this.dataGridView1.Location = new System.Drawing.Point(25, 150);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(640, 346);
             this.dataGridView1.TabIndex = 1;
@@ -109,9 +109,10 @@
             // 
             // tagListControl1
             // 
+            this.tagListControl1.LabelFont = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tagListControl1.Location = new System.Drawing.Point(25, 1);
             this.tagListControl1.Name = "tagListControl1";
-            this.tagListControl1.Size = new System.Drawing.Size(474, 133);
+            this.tagListControl1.Size = new System.Drawing.Size(640, 143);
             this.tagListControl1.TabIndex = 0;
             this.tagListControl1.TagValues = ((System.Collections.Generic.List<string>)(resources.GetObject("tagListControl1.TagValues")));
             // 
