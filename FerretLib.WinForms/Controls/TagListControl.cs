@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using DropDownControls.FilteredGroupedComboBox;
 
-namespace FerretLib.WinForms.Controls
+namespace TagList.WinForms.Controls
 {
     public partial class TagListControl : UserControl
     {

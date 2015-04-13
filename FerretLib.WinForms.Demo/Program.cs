@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FerretLib.WinForms.Demo
+namespace TagList.WinForms.Demo
 {
     static class Program
     {

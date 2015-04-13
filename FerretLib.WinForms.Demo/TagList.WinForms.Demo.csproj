@@ -7,8 +7,8 @@
     <ProjectGuid>{F4933B6F-A2F0-4A3A-8B25-716369C7C092}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FerretLib.WinForms</RootNamespace>
-    <AssemblyName>FerretLib.WinForms.Demo</AssemblyName>
+    <RootNamespace>TagList.WinForms</RootNamespace>
+    <AssemblyName>TagList.WinForms.Demo</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>FerretLib.WinForms.Demo.Program</StartupObject>
+    <StartupObject>TagList.WinForms.Demo.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DropDownControls, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
@@ -87,9 +87,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FerretLib.WinForms\FerretLib.WinForms.csproj">
+    <ProjectReference Include="..\FerretLib.WinForms\TagList.WinForms.csproj">
       <Project>{1bbd5465-2f72-430b-b899-926f03fef87b}</Project>
-      <Name>FerretLib.WinForms</Name>
+      <Name>TagList.WinForms</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

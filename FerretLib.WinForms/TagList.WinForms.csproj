@@ -7,8 +7,8 @@
     <ProjectGuid>{1BBD5465-2F72-430B-B899-926F03FEF87B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FerretLib.WinForms</RootNamespace>
-    <AssemblyName>FerretLib.WinForms</AssemblyName>
+    <RootNamespace>TagList.WinForms</RootNamespace>
+    <AssemblyName>TagList.WinForms</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

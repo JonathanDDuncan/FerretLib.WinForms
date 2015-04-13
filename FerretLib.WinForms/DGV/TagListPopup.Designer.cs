@@ -1,4 +1,4 @@
-﻿namespace FerretLib.WinForms.DGV
+﻿namespace TagList.WinForms.DGV
 {
     partial class TagListPopup
     {
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TagListPopup));
-            this.tagListControl1 = new FerretLib.WinForms.Controls.TagListControl();
+            this.tagListControl1 = new TagList.WinForms.Controls.TagListControl();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnOk = new System.Windows.Forms.Button();

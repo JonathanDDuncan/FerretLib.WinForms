@@ -1,4 +1,4 @@
-﻿namespace FerretLib.WinForms.Controls
+﻿namespace TagList.WinForms.Controls
 {
     partial class TagLabelControl
     {

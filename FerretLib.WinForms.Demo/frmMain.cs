@@ -3,9 +3,9 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using DropDownControls.FilteredGroupedComboBox;
-using FerretLib.WinForms.DGV;
+using TagList.WinForms.DGV;
 
-namespace FerretLib.WinForms
+namespace TagList.WinForms
 {
     public partial class FrmMain : Form
     {

@@ -1,4 +1,4 @@
-﻿namespace FerretLib.WinForms
+﻿namespace TagList.WinForms
 {
     partial class FrmMain
     {
@@ -33,12 +33,12 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new FerretLib.WinForms.DGV.DataGridViewTagListColumn();
+            this.Column3 = new TagList.WinForms.DGV.DataGridViewTagListColumn();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTagListColumn1 = new FerretLib.WinForms.DGV.DataGridViewTagListColumn();
-            this.tagListControl1 = new FerretLib.WinForms.Controls.TagListControl();
+            this.dataGridViewTagListColumn1 = new TagList.WinForms.DGV.DataGridViewTagListColumn();
+            this.tagListControl1 = new TagList.WinForms.Controls.TagListControl();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();

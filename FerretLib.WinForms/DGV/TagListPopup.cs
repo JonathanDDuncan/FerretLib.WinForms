@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using DropDownControls.FilteredGroupedComboBox;
 
-namespace FerretLib.WinForms.DGV
+namespace TagList.WinForms.DGV
 {
     public partial class TagListPopup : Form
     {

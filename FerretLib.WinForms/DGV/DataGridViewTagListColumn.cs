@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace FerretLib.WinForms.DGV
+namespace TagList.WinForms.DGV
 {
     public class DataGridViewTagListColumn : DataGridViewColumn
     {

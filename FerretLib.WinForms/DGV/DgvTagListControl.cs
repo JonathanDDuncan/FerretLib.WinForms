@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using FerretLib.WinForms.Controls;
+using TagList.WinForms.Controls;
 
-namespace FerretLib.WinForms.DGV
+namespace TagList.WinForms.DGV
 {
     public class DgvTagListControl : TagListControl , IDataGridViewEditingControl
     {

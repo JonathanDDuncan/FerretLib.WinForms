@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using DropDownControls.FilteredGroupedComboBox;
-using FerretLib.WinForms.Controls;
+using TagList.WinForms.Controls;
 
-namespace FerretLib.WinForms.DGV
+namespace TagList.WinForms.DGV
 {
     public class DataGridViewTagListCell : DataGridViewTextBoxCell
     {

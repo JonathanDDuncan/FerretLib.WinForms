@@ -1,6 +1,6 @@
 ﻿using DropDownControls.FilteredGroupedComboBox;
 
-namespace FerretLib.WinForms.Controls
+namespace TagList.WinForms.Controls
 {
     partial class TagListControl
     {

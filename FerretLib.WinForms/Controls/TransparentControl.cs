@@ -1,6 +1,6 @@
 using System.Windows.Forms;
 
-namespace FerretLib.WinForms.Controls
+namespace TagList.WinForms.Controls
 {
     internal class TransparentControl : Control
     {
