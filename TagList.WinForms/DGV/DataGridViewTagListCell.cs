@@ -82,10 +82,10 @@ namespace TagList.DGV
             graphics.DrawImage(img, cellBounds.Location);
         }
 
-        private IEnumerable<GroupedComboBoxItem> GetDataSource()
+        private IEnumerable<GroupedColoredComboBoxItem> GetDataSource()
         {
             var oc = (DataGridViewTagListColumn)OwningColumn;
-            var ds = oc.DataSource as IEnumerable<GroupedComboBoxItem>;
+            var ds = oc.DataSource as IEnumerable<GroupedColoredComboBoxItem>;
             return ds;
         }
 

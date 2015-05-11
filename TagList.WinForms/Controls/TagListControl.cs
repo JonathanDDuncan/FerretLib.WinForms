@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using DropDownControls.FilteredGroupedComboBox;
+using TagList.DGV;
 
 namespace TagList.Controls
 {
@@ -19,8 +20,8 @@ namespace TagList.Controls
             if (handler != null) handler(this, EventArgs.Empty);
         }
 
-        private readonly Dictionary<string, string> _tags;
-        private IEnumerable<GroupedComboBoxItem> _groupItems;
+        private readonly Dictionary<string, Tuple <string, Color>> _tags;
+        private IEnumerable<GroupedColoredComboBoxItem> _groupItems;
 
 
         public int Count
@@ -47,7 +48,7 @@ namespace TagList.Controls
 
             if (value != null)
                 value.ForEach(x =>
-                     { var item = GetTag(x); if (item != null) _tags.Add(item.Value, item.Display); });
+                     { var item = GetTag(x); if (item != null) _tags.Add(item.Value, Tuple.Create(item.Display, item.Color)); });
             RebuildTagList();
         }
 
@@ -56,24 +57,24 @@ namespace TagList.Controls
             combFG.Text = "";
             foreach (var tag in _tags.OrderBy(x => x.Value))
             {
-                AddTagLabel(tag.Value, tag.Key);
+                AddTagLabel(tag.Value.Item1, tag.Key, tag.Value.Item2);
             }
         }
 
-        private void AddTag(string text, string value)
+        private void AddTag(string text, string value, Color color)
         {
             value = value.Trim();
             text = text.Trim();
 
             if (_tags.ContainsKey(value)) return;
-            _tags.Add(value, text);
-            AddTagLabel(text, value);
+            _tags.Add(value, Tuple.Create(text,color));
+            AddTagLabel(text, value, color);
             OnValueChanged();
         }
 
-        private void AddTagLabel(string text, string value)
+        private void AddTagLabel(string text, string value, Color color)
         {
-            var tagLabel = new TagLabelControl() { Name = GetTagControlName(value), TabStop = false, Color = Color.LightSteelBlue  };
+            var tagLabel = new TagLabelControl() { Name = GetTagControlName(value), TabStop = false, Color = color };
 
             tagLabel.SetString(text, LabelFont);
             tagPanel.Controls.Add(tagLabel);
@@ -90,12 +91,12 @@ namespace TagList.Controls
             OnValueChanged();
         }
 
-        private GroupedComboBoxItem GetTag(string value)
+        private GroupedColoredComboBoxItem GetTag(string value)
         {
             return _groupItems != null ? _groupItems.FirstOrDefault(x => x.Value == value) : null;
         }
 
-        private GroupedComboBoxItem GetTagByText(string text)
+        private GroupedColoredComboBoxItem GetTagByText(string text)
         {
             return _groupItems.FirstOrDefault(x => x.Display == text);
         }
@@ -116,22 +117,27 @@ namespace TagList.Controls
         public TagListControl()
         {
             InitializeComponent();
-            _tags = new Dictionary<string, string>();
+            _tags = new Dictionary<string, Tuple<string, Color>>();
             Clear();
         }
 
         private void AddTagFromComboBox()
         {
             if (combFG.SelectedIndex == -1) return;
-            AddTag(combFG.Text, combFG.SelectedValue.ToString());
+
+
+            var color = (Color) ((System.Data.DataRowView) (combFG.SelectedItem)).Row.ItemArray[3] ;
+
+
+            AddTag(combFG.Text, combFG.SelectedValue.ToString(), color);
         }
 
-        public void SelectionItemList(IEnumerable<GroupedComboBoxItem> groupItems)
+        public void SelectionItemList(IEnumerable<GroupedColoredComboBoxItem> groupItems)
         {
             if (groupItems == null) return;
-            var groupedComboBoxItems = groupItems as IList<GroupedComboBoxItem> ?? groupItems.ToList();
-            _groupItems = groupedComboBoxItems;
-            combFG.FilterableGroupableDataSource(groupedComboBoxItems);
+            var groupedColoredComboBoxItems = groupItems as IList<GroupedColoredComboBoxItem> ?? groupItems.ToList();
+            _groupItems = groupedColoredComboBoxItems;
+            combFG.FilterableGroupableDataSource(groupedColoredComboBoxItems);
         }
 
         private void TagLabel_DeleteClicked(object sender, string text)

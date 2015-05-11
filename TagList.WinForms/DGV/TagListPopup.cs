@@ -16,7 +16,7 @@ namespace TagList.DGV
 
         public List<string> TagValues { get; set; }
 
-        public IEnumerable<GroupedComboBoxItem> SelectionItemList
+        public IEnumerable<GroupedColoredComboBoxItem> SelectionItemList
         {
             set { tagListControl1.SelectionItemList(value); }
         }
