@@ -20,7 +20,7 @@ namespace TagList.Controls
             if (handler != null) handler(this, EventArgs.Empty);
         }
 
-        private readonly Dictionary<string, Tuple <string, Color>> _tags;
+        private readonly Dictionary<string, Tuple<string, Color>> _tags;
         private IEnumerable<GroupedColoredComboBoxItem> _groupItems;
 
 
@@ -48,7 +48,13 @@ namespace TagList.Controls
 
             if (value != null)
                 value.ForEach(x =>
-                     { var item = GetTag(x); if (item != null) _tags.Add(item.Value, Tuple.Create(item.Display, item.Color)); });
+                     {
+                         var item = GetTag(x); if (item != null)
+                         {
+                             if (!_tags.ContainsKey(item.Value))
+                                 _tags.Add(item.Value, Tuple.Create(item.Display, item.Color));
+                         }
+                     });
             RebuildTagList();
         }
 
@@ -67,7 +73,7 @@ namespace TagList.Controls
             text = text.Trim();
 
             if (_tags.ContainsKey(value)) return;
-            _tags.Add(value, Tuple.Create(text,color));
+            _tags.Add(value, Tuple.Create(text, color));
             AddTagLabel(text, value, color);
             OnValueChanged();
         }
@@ -126,7 +132,7 @@ namespace TagList.Controls
             if (combFG.SelectedIndex == -1) return;
 
 
-            var color = (Color) ((System.Data.DataRowView) (combFG.SelectedItem)).Row.ItemArray[3] ;
+            var color = (Color)((System.Data.DataRowView)(combFG.SelectedItem)).Row.ItemArray[3];
 
 
             AddTag(combFG.Text, combFG.SelectedValue.ToString(), color);
