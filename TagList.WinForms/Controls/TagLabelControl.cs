@@ -22,23 +22,41 @@ namespace TagList.Controls
         private bool _isDisposing;
 
 
-        public TagLabelControl()
+        public TagLabelControl(bool visualOnly)
         {
+            if (!visualOnly)
             InitializeComponent();
+            else InitializeComponentVisualOnly();
 
         }
+        private void InitializeComponentVisualOnly()
+        {
+            this.SuspendLayout();
+            // 
+            // TagLabelControl
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Transparent;
+            this.DoubleBuffered = false;
+            this.Name = "TagLabelControl";
+            this.Size = new System.Drawing.Size(176, 20);
+            //this.Click += new System.EventHandler(this.Control_Click);
+            //this.DoubleClick += new System.EventHandler(this.Control_DoubleClick);
+            this.ResumeLayout(false);
 
+        }
+        
         public void SetString(string value, Font labelFont)
         {
             LabelFont = labelFont;
-            Value = value;
+          
 
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.SupportsTransparentBackColor | ControlStyles.OptimizedDoubleBuffer, true);
             SetStyle(ControlStyles.Opaque | ControlStyles.FixedHeight, false);
             BackColor = Color.Transparent;
 
-            RecreateBuffer();
-            Redraw();
+            Value = value; //Also redraws
         }
 
         protected override void Dispose(bool disposing)

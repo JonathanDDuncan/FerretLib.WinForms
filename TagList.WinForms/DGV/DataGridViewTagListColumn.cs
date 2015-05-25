@@ -7,6 +7,7 @@ namespace TagList.DGV
 {
     public class DataGridViewTagListColumn : DataGridViewColumn
     {
+        public DgvTagListControl DgvTagListControl;
         public Font LabelFont { get; set; }
 
         public DataGridViewTagListColumn()
