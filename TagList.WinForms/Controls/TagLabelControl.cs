@@ -25,9 +25,16 @@ namespace TagList.Controls
         public TagLabelControl(bool visualOnly)
         {
             if (!visualOnly)
-            InitializeComponent();
-            else InitializeComponentVisualOnly();
+            {
+                InitializeComponent();
+                
+            }
+            else
+            {
+                InitializeComponentVisualOnly();
 
+                
+            }
         }
         private void InitializeComponentVisualOnly()
         {

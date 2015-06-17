@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using DropDownControls.FilteredGroupedComboBox;
-using TagList.DGV;
 
 namespace TagList.Controls
 {
@@ -122,6 +121,12 @@ namespace TagList.Controls
             OnValueChanged();
         }
 
+        public TagListControl()
+        {
+            InitializeComponent();
+            _tags = new Dictionary<string, Tuple<string, Color>>();
+            Clear();
+        }
         public TagListControl(bool visualOnly = false)
         {
             if (!visualOnly)
