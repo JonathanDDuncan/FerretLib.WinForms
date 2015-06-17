@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using DropDownControls.FilteredGroupedComboBox;
+using TagList.DGV;
 
 namespace TagList.Controls
 {
@@ -21,7 +22,6 @@ namespace TagList.Controls
 
         private readonly Dictionary<string, Tuple<string, Color>> _tags;
         private IEnumerable<GroupedColoredComboBoxItem> _groupItems;
-        private bool _visualOnly;
 
 
         public int Count
@@ -60,8 +60,7 @@ namespace TagList.Controls
 
         private void RebuildTagList()
         {
-            if (!_visualOnly)
-                combFG.Text = "";
+            combFG.Text = "";
             foreach (var tag in _tags.OrderBy(x => x.Value))
             {
                 AddTagLabel(tag.Value.Item1, tag.Key, tag.Value.Item2);
@@ -81,7 +80,7 @@ namespace TagList.Controls
 
         private void AddTagLabel(string text, string value, Color color)
         {
-            var tagLabel = new TagLabelControl(true) { Name = GetTagControlName(value), TabStop = false, Color = color };
+            var tagLabel = new TagLabelControl() { Name = GetTagControlName(value), TabStop = false, Color = color };
 
             tagLabel.SetString(text, LabelFont);
             tagPanel.Controls.Add(tagLabel);
@@ -127,6 +126,7 @@ namespace TagList.Controls
             _tags = new Dictionary<string, Tuple<string, Color>>();
             Clear();
         }
+
         public TagListControl(bool visualOnly = false)
         {
             if (!visualOnly)
@@ -141,6 +141,7 @@ namespace TagList.Controls
             _tags = new Dictionary<string, Tuple<string, Color>>();
             Clear();
         }
+
         private void InitializeComponentVisualOnly()
         {
             this.tagPanel = new System.Windows.Forms.FlowLayoutPanel();
@@ -185,11 +186,21 @@ namespace TagList.Controls
             this.ResumeLayout(false);
 
         }
+
+
+
+
+
+
+
         private void AddTagFromComboBox()
         {
-            if (_visualOnly) return;
             if (combFG.SelectedIndex == -1) return;
+
+
             var color = (Color)((System.Data.DataRowView)(combFG.SelectedItem)).Row.ItemArray[3];
+
+
             AddTag(combFG.Text, combFG.SelectedValue.ToString(), color);
         }
 
@@ -198,8 +209,6 @@ namespace TagList.Controls
             if (groupItems == null) return;
             var groupedColoredComboBoxItems = groupItems as IList<GroupedColoredComboBoxItem> ?? groupItems.ToList();
             _groupItems = groupedColoredComboBoxItems;
-
-            if (_visualOnly) return;
             combFG.FilterableGroupableDataSource(groupedColoredComboBoxItems);
         }
 
@@ -228,5 +237,7 @@ namespace TagList.Controls
         {
             return tagPanel.GetPreferredSize(size);
         }
+
+        public bool _visualOnly { get; set; }
     }
 }

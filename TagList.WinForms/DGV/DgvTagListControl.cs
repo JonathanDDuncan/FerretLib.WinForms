@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using TagList.Controls;
 
@@ -13,10 +12,10 @@ namespace TagList.DGV
         private bool _comboBoxVisible;
         private bool _tagPanelAutoScroll;
 
-        public DgvTagListControl(bool visualOnly = false) : base(false)
+        public DgvTagListControl()
         {
             InitializeComponent();
-            _tagList = new TagListControl(visualOnly);
+            _tagList = new TagListControl();
         }
 
         // Implements the IDataGridViewEditingControl.EditingControlFormattedValue  

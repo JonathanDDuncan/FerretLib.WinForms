@@ -10,8 +10,6 @@ namespace TagList.DGV
 {
     public class DataGridViewTagListCell : DataGridViewTextBoxCell
     {
-        private DgvTagListControl _dgvTagListControl;
-
         public override void InitializeEditingControl(int rowIndex, object
             initialFormattedValue, DataGridViewCellStyle dataGridViewCellStyle)
         {
@@ -145,24 +143,15 @@ namespace TagList.DGV
 
         private DgvTagListControl GetControltoDraw(List<string> value)
         {
-            var myColumn = (DataGridViewTagListColumn) OwningColumn;
-            if (myColumn.DgvTagListControl == null)
-            {
-                var ctrl = new DgvTagListControl(true);
-                var owningColumn = (DataGridViewTagListColumn)OwningColumn;
-                ctrl.LabelFont = owningColumn.LabelFont;
-                ctrl.SelectionItemList(GetDataSource());
-            
-                ctrl.ComboBoxVisible = false;
-                ctrl.TagPanelAutoScroll = false;
+            var ctrl = new DgvTagListControl();
+            var owningColumn = (DataGridViewTagListColumn)OwningColumn;
+            ctrl.LabelFont = owningColumn.LabelFont;
+            ctrl.SelectionItemList(GetDataSource());
+            ctrl.TagValues = value;
+            ctrl.ComboBoxVisible = false;
+            ctrl.TagPanelAutoScroll = false;
 
-                myColumn.DgvTagListControl = ctrl;
-            }
-
-
-            myColumn.DgvTagListControl.TagValues = value;
-
-            return myColumn.DgvTagListControl;
+            return ctrl;
         }
     }
 }
